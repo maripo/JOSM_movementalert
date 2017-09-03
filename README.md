@@ -14,7 +14,7 @@ This plugin is now experimental. Please feel free to send the developer your sug
  * Maripo GODA <goda.mariko@gmail.com>
  * License: GPL v2 (as JOSM)
  
- ![](https://raw.githubusercontent.com/maripo/JOSM_movementalert/master/doc/img/screenshot.png)|Standard mode
+ ![](https://raw.githubusercontent.com/maripo/JOSM_movementalert/master/doc/img/screenshot.png)|Usage
  
  ![](https://raw.githubusercontent.com/maripo/JOSM_movementalert/master/doc/img/screenshot_pref.png)|Preferences
     
