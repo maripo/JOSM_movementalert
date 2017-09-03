@@ -22,7 +22,7 @@
          See https://josm.openstreetmap.de/wiki/DevelopersGuide/DevelopingPlugins
     -->
     <property name="plugin.author" value="Maripo GODA"/>
-    <property name="plugin.class" value="org.maripo.josm.MovementAlertPlugin"/>
+    <property name="plugin.class" value="org.maripo.josm.movementalert.MovementAlertPlugin"/>
     <property name="plugin.description" value="This plugin will display an alert whenever an object is moved a long distance (such as by a misoperation) "/>
     
     <property name="plugin.icon" value="images/movementalert.png"/>
