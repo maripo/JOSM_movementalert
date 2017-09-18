@@ -1,0 +1,39 @@
+# English translations for PACKAGE package.
+# Copyright (C) 2017 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Mariko GODA <EMAIL@ADDRESS>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-09-18 21:18+0900\n"
+"PO-Revision-Date: 2017-09-18 21:18+0900\n"
+"Last-Translator: Mariko GODA <EMAIL@ADDRESS>\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ASCII\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: src/org/maripo/josm/movementalert/MovementAlertPlugin.java:58
+msgid "Move elements"
+msgstr "Move elements"
+
+#: src/org/maripo/josm/movementalert/MovementAlertPlugin.java:74
+#, java-format
+msgid "The object was moved {0}m."
+msgstr "The object was moved {0}m."
+
+#: src/org/maripo/josm/movementalert/MovementAlertPreferences.java:28
+msgid "MovementAlert settings"
+msgstr "MovementAlert settings"
+
+#: src/org/maripo/josm/movementalert/MovementAlertPreferences.java:28
+msgid "Settings for MovementAlert plugin"
+msgstr "Settings for MovementAlert plugin"
+
+#: src/org/maripo/josm/movementalert/MovementAlertPreferences.java:47
+msgid "Alert threshold (m)"
+msgstr "Alert threshold (m)"

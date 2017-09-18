@@ -26,7 +26,7 @@
     <property name="plugin.description" value="This plugin will display an alert whenever an object is moved a long distance (such as by a misoperation) "/>
     
     <property name="plugin.icon" value="images/movementalert.png"/>
-    <property name="plugin.link" value="..."/>
+    <property name="plugin.link" value="https://github.com/maripo/JOSM_movementalert"/>
     <!--<property name="plugin.early" value="..."/>-->
     <!--<property name="plugin.requires" value="..."/>-->
     <!--<property name="plugin.stage" value="..."/>-->

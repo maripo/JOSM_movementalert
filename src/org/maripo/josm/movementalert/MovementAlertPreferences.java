@@ -44,7 +44,7 @@ public class MovementAlertPreferences extends DefaultTabPreferenceSetting implem
         
         p.add(movementAlertOff, GBC.eol());
         p.add(movementAlertOn, GBC.eol());
-        p.add(new JLabel("Alert threshold (m)"), GBC.std().insets(20, 0, 0, 0));
+        p.add(new JLabel(tr("Alert threshold (m)")), GBC.std().insets(20, 0, 0, 0));
         p.add(movementAlertThreshold, GBC.eol().fill(GBC.HORIZONTAL).insets(0, 0, 0, 5));
         p.add(Box.createVerticalGlue(), GBC.eol().fill(GBC.VERTICAL));
         
