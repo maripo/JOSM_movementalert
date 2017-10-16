@@ -28,7 +28,7 @@ public class MovementAlertSettings {
 					threshold = v;
 				}
 			} catch (NumberFormatException e) {
-				e.printStackTrace();
+				// e.printStackTrace();
 			}
 		}
 		isEnabled = "true".equals(Main.pref.get(MOVEMENT_ALERT_ENABLE_KEY));
@@ -41,7 +41,7 @@ public class MovementAlertSettings {
 				threshold = newThreshold;
 			}
 		} catch (NumberFormatException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 		}
 		this.isEnabled = isEnabled;
 		Main.pref.put(MOVEMENT_ALERT_ENABLE_KEY, Boolean.toString(isEnabled));
