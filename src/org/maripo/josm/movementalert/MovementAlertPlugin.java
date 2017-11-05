@@ -89,7 +89,6 @@ public class MovementAlertPlugin extends Plugin implements LayerChangeListener, 
 				toCoord.lat(), toCoord.lon());
 		
 		boolean shouldAlert;
-		String extraMsg = "";
 		if (conf.isThresholdRelativeToZoom()) {
 			// Compare screen size and screen points
 			shouldAlert = false;
@@ -99,7 +98,6 @@ public class MovementAlertPlugin extends Plugin implements LayerChangeListener, 
 				double diagonalLength = Math.sqrt(Math.pow(mapBounds.getWidth(),2) + 
 						Math.pow(mapBounds.getHeight(),2));
 				shouldAlert = (screenDistance > diagonalLength * MovementAlertSettings.RELATIVE_THRESHOLD_RATIO);
-				extraMsg = ("\n" + screenDistance + " / " + diagonalLength);
 			}
 		} else {
 			// Compare geographical positions
@@ -109,7 +107,7 @@ public class MovementAlertPlugin extends Plugin implements LayerChangeListener, 
 
 		if (shouldAlert) {
 			new ConfirmMoveDialog()
-					.setContent(tr("The object was moved {0}m.", String.format("%.1f", geoDistance)) + extraMsg)
+					.setContent(tr("The object was moved {0}m.", String.format("%.1f", geoDistance)))
 					.toggleEnable(MovementAlertSettings.MOVEMENT_ALERT_ENABLE_KEY_DIALOG)
 					.showDialog();
 		}
