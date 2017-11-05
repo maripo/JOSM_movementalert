@@ -21,7 +21,11 @@ public class MovementAlertPreferences extends DefaultTabPreferenceSetting implem
 
     private final JRadioButton movementAlertOn = new JRadioButton("On");
     private final JRadioButton movementAlertOff = new JRadioButton("Off");
-    private final JosmTextField movementAlertThreshold = new JosmTextField();
+
+    private final JRadioButton thresholdAbsolute = new JRadioButton("Distance");
+    private final JRadioButton thresholdRelative = new JRadioButton("Relative to zoom level");
+    
+    private final JosmTextField movementAlertThreshold = new JosmTextField(6);
     
     
     private MovementAlertPreferences () {
@@ -44,8 +48,20 @@ public class MovementAlertPreferences extends DefaultTabPreferenceSetting implem
         
         p.add(movementAlertOff, GBC.eol());
         p.add(movementAlertOn, GBC.eol());
-        p.add(new JLabel(tr("Alert threshold (m)")), GBC.std().insets(20, 0, 0, 0));
-        p.add(movementAlertThreshold, GBC.eol().fill(GBC.HORIZONTAL).insets(0, 0, 0, 5));
+        p.add(new JLabel(tr("Alert threshold")), GBC.eol().insets(25, 0, 0, 0));
+        
+        ButtonGroup thresholdTypeButtons = new ButtonGroup();
+        thresholdTypeButtons.add(thresholdAbsolute);
+        thresholdTypeButtons.add(thresholdRelative);
+        // Absolute
+        p.add(thresholdAbsolute, GBC.std().insets(40, 0, 0, 0));
+        p.add(movementAlertThreshold, GBC.std());
+        p.add(new JLabel("(m)"), GBC.eol().fill(GBC.HORIZONTAL));
+        
+        // Relative
+        p.add(thresholdRelative, GBC.eol().insets(40, 0, 0, 0).fill(GBC.HORIZONTAL));
+        
+        // Filler
         p.add(Box.createVerticalGlue(), GBC.eol().fill(GBC.VERTICAL));
         
         createPreferenceTabWithScrollPane(gui, p);
@@ -56,8 +72,12 @@ public class MovementAlertPreferences extends DefaultTabPreferenceSetting implem
 		MovementAlertSettings settings = MovementAlertSettings.sharedInstance();
 		settings.load();
 		movementAlertThreshold.setText(Integer.toString(settings.getThreshold()));
+		
 		movementAlertOn.setSelected(settings.isEnabled());
 		movementAlertOff.setSelected(!settings.isEnabled());
+		
+		thresholdAbsolute.setSelected(!settings.isThresholdRelativeToZoom());
+		thresholdRelative.setSelected(settings.isThresholdRelativeToZoom());
 	}
 
 	@Override
@@ -67,7 +87,9 @@ public class MovementAlertPreferences extends DefaultTabPreferenceSetting implem
 	}
 	
 	private void save() {
-		MovementAlertSettings.sharedInstance().save(movementAlertThreshold.getText(), movementAlertOn.isSelected());	
+		MovementAlertSettings.sharedInstance().save(movementAlertThreshold.getText(), 
+				movementAlertOn.isSelected(),
+				thresholdRelative.isSelected());	
 	}
 
 	@Override

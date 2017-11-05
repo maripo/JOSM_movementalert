@@ -1,6 +1,7 @@
 package org.maripo.josm.movementalert;
 
 import java.awt.AWTEvent;
+import java.awt.Point;
 import java.awt.event.AWTEventListener;
 import java.awt.event.MouseEvent;
 import java.util.Iterator;
@@ -27,7 +28,7 @@ class MovementMonitor implements DataSetListener, AWTEventListener, DataSelectio
 	private boolean isDragging = false;
 	
 	interface MovementListener {
-		public void onMove (LatLon from, LatLon to);
+		public void onMove (LatLon fromCoord, LatLon toCoord, Point fromPoint, Point toPoint);
 	}
 	MovementListener movementListener = null;
 	public void setMovementListener (MovementListener movementListener) {
@@ -134,20 +135,25 @@ class MovementMonitor implements DataSetListener, AWTEventListener, DataSelectio
 		select(node);
 	}
 
+	// Mouse position in screen
+	private Point toPoint;
+	private Point fromPoint;
 	@Override
 	public void eventDispatched(AWTEvent event) {
 		MouseEvent mouseEvent = (MouseEvent) event;
 		if (mouseEvent.getID()==MouseEvent.MOUSE_RELEASED) {
 			isDragging = false;
+			toPoint = mouseEvent.getPoint();
 			LatLon from = originalCoord;
 			LatLon to = latestCoord;
 			resetOriginalCoord();
 			if (from!=null && to!=null && movementListener!=null) {
-				movementListener.onMove(from, to);
+				movementListener.onMove(from, to, fromPoint, toPoint);
 			}
 		}
 		else if (mouseEvent.getID()==MouseEvent.MOUSE_PRESSED) {
 			isDragging = true;
+			fromPoint = mouseEvent.getPoint();
 			lastDistance = 0;
 		}
 	}

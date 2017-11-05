@@ -3,6 +3,9 @@ package org.maripo.josm.movementalert;
 import static org.openstreetmap.josm.tools.I18n.tr;
 
 import java.awt.AWTEvent;
+import java.awt.Component;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 
 import org.maripo.josm.movementalert.MovementMonitor.MovementListener;
@@ -10,6 +13,8 @@ import org.openstreetmap.gui.jmapviewer.OsmMercator;
 import org.openstreetmap.josm.Main;
 import org.openstreetmap.josm.data.coor.LatLon;
 import org.openstreetmap.josm.gui.ExtendedDialog;
+import org.openstreetmap.josm.gui.MainApplication;
+import org.openstreetmap.josm.gui.MapFrame;
 import org.openstreetmap.josm.gui.layer.Layer;
 import org.openstreetmap.josm.gui.layer.LayerManager.LayerAddEvent;
 import org.openstreetmap.josm.gui.layer.LayerManager.LayerChangeListener;
@@ -30,16 +35,17 @@ public class MovementAlertPlugin extends Plugin implements LayerChangeListener, 
 		monitor = new MovementMonitor();
 		monitor.setMovementListener(this);
 		System.out.println("MovementAlertApp");
-		Main.getLayerManager().addLayerChangeListener(this);
+		MainApplication.getLayerManager().addLayerChangeListener(this);
 		Toolkit.getDefaultToolkit().addAWTEventListener(monitor, AWTEvent.MOUSE_EVENT_MASK);
 	}
 
 	@Override
 	public void layerAdded(LayerAddEvent evt) {
-		Layer layer = evt.getAddedLayer();
-		if (layer instanceof OsmDataLayer) {
-			((OsmDataLayer) layer).data.addDataSetListener(monitor);
-			((OsmDataLayer) layer).data.addSelectionListener(monitor);
+		Layer _layer = evt.getAddedLayer();
+		if (_layer instanceof OsmDataLayer) {
+			OsmDataLayer layer = (OsmDataLayer)_layer;
+			layer.data.addDataSetListener(monitor);
+			layer.data.addSelectionListener(monitor);
 		}
 	}
 
@@ -64,16 +70,50 @@ public class MovementAlertPlugin extends Plugin implements LayerChangeListener, 
     public PreferenceSetting getPreferenceSetting() {
         return MovementAlertPreferences.createInstance();
     }
-
+    private Rectangle getMapBounds () {
+    	for (Component component : MainApplication.getMainPanel().getComponents()) {
+			if (component instanceof MapFrame) {
+				return ((MapFrame)component).mapView.getBounds();
+			}
+		}
+    	return null;
+    }
+    
 	@Override
-	public void onMove(LatLon from, LatLon to) {
-		double distance = OsmMercator.MERCATOR_256.getDistance(from.lat(), from.lon(), to.lat(), to.lon());
+	public void onMove (LatLon fromCoord, LatLon toCoord, Point fromPoint, Point toPoint) {
+		
+		MovementAlertSettings conf = MovementAlertSettings.sharedInstance();
+		if (!conf.isEnabled()) {
+			return;
+		}
+		double geoDistance = OsmMercator.MERCATOR_256.getDistance(fromCoord.lat(), fromCoord.lon(), 
+				toCoord.lat(), toCoord.lon());
+		
+		boolean shouldAlert;
+		String extraMsg = "";
+		if (conf.isThresholdRelativeToZoom()) {
+			// Compare screen size and screen points
+			shouldAlert = false;
+			double screenDistance = fromPoint.distance(toPoint);
+			Rectangle mapBounds = getMapBounds();
+			if (mapBounds!=null) {
+				double diagonalLength = Math.sqrt(Math.pow(mapBounds.getWidth(),2) + 
+						Math.pow(mapBounds.getHeight(),2));
+				shouldAlert = (screenDistance > diagonalLength * MovementAlertSettings.RELATIVE_THRESHOLD_RATIO);
+				extraMsg = ("\n" + screenDistance + " / " + diagonalLength);
+			}
+		} else {
+			// Compare geographical positions
+			shouldAlert = (geoDistance > MovementAlertSettings.sharedInstance().getThreshold());
+		}
+		
 
-		if (distance > MovementAlertSettings.sharedInstance().getThreshold()) {
+		if (shouldAlert) {
 			new ConfirmMoveDialog()
-					.setContent(tr("The object was moved {0}m.", String.format("%.1f", distance)))
+					.setContent(tr("The object was moved {0}m.", String.format("%.1f", geoDistance)) + extraMsg)
 					.toggleEnable(MovementAlertSettings.MOVEMENT_ALERT_ENABLE_KEY_DIALOG)
 					.showDialog();
 		}
+		
 	}
 }
