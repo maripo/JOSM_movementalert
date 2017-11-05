@@ -34,7 +34,6 @@ public class MovementAlertPlugin extends Plugin implements LayerChangeListener, 
 		MovementAlertSettings.sharedInstance().load();
 		monitor = new MovementMonitor();
 		monitor.setMovementListener(this);
-		System.out.println("MovementAlertApp");
 		MainApplication.getLayerManager().addLayerChangeListener(this);
 		Toolkit.getDefaultToolkit().addAWTEventListener(monitor, AWTEvent.MOUSE_EVENT_MASK);
 	}

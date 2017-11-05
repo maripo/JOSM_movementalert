@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-18 21:18+0900\n"
+"POT-Creation-Date: 2017-11-05 17:10+0900\n"
 "PO-Revision-Date: 2017-09-18 21:19+0900\n"
 "Last-Translator: Mariko GODA <EMAIL@ADDRESS>\n"
 "Language-Team: Japanese\n"
@@ -17,23 +17,31 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: src/org/maripo/josm/movementalert/MovementAlertPlugin.java:58
+#: src/org/maripo/josm/movementalert/MovementAlertPlugin.java:63
 msgid "Move elements"
 msgstr "要素を移動"
 
-#: src/org/maripo/josm/movementalert/MovementAlertPlugin.java:74
+#: src/org/maripo/josm/movementalert/MovementAlertPlugin.java:112
 #, java-format
 msgid "The object was moved {0}m."
 msgstr "オブジェクトが{0}m動かされました。"
 
-#: src/org/maripo/josm/movementalert/MovementAlertPreferences.java:28
+#: src/org/maripo/josm/movementalert/MovementAlertPreferences.java:25
+msgid "Distance"
+msgstr "距離"
+
+#: src/org/maripo/josm/movementalert/MovementAlertPreferences.java:26
+msgid "Relative to zoom level"
+msgstr "ズームレベルに依存"
+
+#: src/org/maripo/josm/movementalert/MovementAlertPreferences.java:32
 msgid "MovementAlert settings"
 msgstr "MovementAlert設定"
 
-#: src/org/maripo/josm/movementalert/MovementAlertPreferences.java:28
+#: src/org/maripo/josm/movementalert/MovementAlertPreferences.java:32
 msgid "Settings for MovementAlert plugin"
 msgstr "MovementAlertプラグイン設定"
 
-#: src/org/maripo/josm/movementalert/MovementAlertPreferences.java:47
-msgid "Alert threshold (m)"
-msgstr "警告する閾値 (m)"
+#: src/org/maripo/josm/movementalert/MovementAlertPreferences.java:51
+msgid "Alert threshold"
+msgstr "警告する閾値"

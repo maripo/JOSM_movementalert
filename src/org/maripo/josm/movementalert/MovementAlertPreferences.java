@@ -22,8 +22,8 @@ public class MovementAlertPreferences extends DefaultTabPreferenceSetting implem
     private final JRadioButton movementAlertOn = new JRadioButton("On");
     private final JRadioButton movementAlertOff = new JRadioButton("Off");
 
-    private final JRadioButton thresholdAbsolute = new JRadioButton("Distance");
-    private final JRadioButton thresholdRelative = new JRadioButton("Relative to zoom level");
+    private final JRadioButton thresholdAbsolute = new JRadioButton(tr("Distance"));
+    private final JRadioButton thresholdRelative = new JRadioButton(tr("Relative to zoom level"));
     
     private final JosmTextField movementAlertThreshold = new JosmTextField(6);
     
