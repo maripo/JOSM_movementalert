@@ -1,20 +1,26 @@
 JOSM MovementAlert Plugin 
 ======
 
-This plugin will display an alert whenever an object is moved a long distance (such as by a misoperation)).
+MovementAlertは、オブジェクトが (しばしば誤操作によって) 長距離動かされたときに警告を表示します。
 
-Most of mappers have moved nodes and ways by misoperations.
-Many power mappers have moved stray buildings back to their original places.
-This plugin alerts when unnaturally long movements are made to confirm that the operations are really intended. 
+マッパーなら誰しも、ノードやウェイを誤操作で動かしてしまった経験があるでしょう。
+たくさんマッピングしていれば、誰かがうっかり動かしてしまったと思しき迷子の建物見つけ、元の場所に戻したこともあるでしょう。
 
-You can change distance threshold in the preferences tab. The functionalities can be turn on and off.
-
-This plugin is now experimental. Please feel free to send the developer your suggestions or pull requests!
-
- * Maripo GODA <goda.mariko@gmail.com>
- * License: GPL v2 (as JOSM)
+このプラグインは、不自然に長距離動かされた場合にダイアログを表示し、その操作が本当に意図したものなのかどうかを確認します。
  
  ![Usage](https://raw.githubusercontent.com/maripo/JOSM_movementalert/master/doc/img/screenshot_ja.png)
- 
+
+警告する距離の閾値は設定で変更することができます。
+
  ![Preferences](https://raw.githubusercontent.com/maripo/JOSM_movementalert/master/doc/img/screenshot_pref_ja.png)
+
+* 距離: 地理的な距離によって閾値を設定します。
+* ズームレベルに依存: 画面上で長距離動かされたときにダイアログが表示されます。 
+
+これらの機能はオン/オフを切り替えることができます。
+
+このプラグインはまだ実験的なものです。ご提案やPull Requestをお寄せ下さい!
+
+ * ごうだまりぽ <goda.mariko@gmail.com>
+ * License: GPL v2 (as JOSM)
     
