@@ -1,6 +1,6 @@
 package org.maripo.josm.movementalert;
 
-import org.openstreetmap.josm.Main;
+import org.openstreetmap.josm.spi.preferences.Config;
 
 public class MovementAlertSettings {
     public static final String MOVEMENT_ALERT_THRESHOLD_KEY = "movementAlert.threshold";
@@ -22,7 +22,7 @@ public class MovementAlertSettings {
 		return instance;
 	}
 	public void load() {
-		String thresholdStr = Main.pref.get(MOVEMENT_ALERT_THRESHOLD_KEY);
+		String thresholdStr = Config.getPref().get(MOVEMENT_ALERT_THRESHOLD_KEY);
 		threshold = THRESHOLD_DEFAULT;
 		if (thresholdStr != null) {
 			try {
@@ -34,14 +34,14 @@ public class MovementAlertSettings {
 				// e.printStackTrace();
 			}
 		}
-		isEnabled = !"false".equals(Main.pref.get(MOVEMENT_ALERT_ENABLE_KEY));
-		isThresholdRelativeToZoom = "true".equals(Main.pref.get(MOVEMENT_ALERT_RELATIVE_TO_ZOOM_LEVEL));
+		isEnabled = !"false".equals(Config.getPref().get(MOVEMENT_ALERT_ENABLE_KEY));
+		isThresholdRelativeToZoom = "true".equals(Config.getPref().get(MOVEMENT_ALERT_RELATIVE_TO_ZOOM_LEVEL));
 	}
 	public void save (String thresholdStr, boolean isEnabled, boolean isThresholdRelativeToZoom) {
 		try {
 			int newThreshold = Integer.parseInt(thresholdStr);
 			if (newThreshold > 0) {
-				Main.pref.put(MOVEMENT_ALERT_THRESHOLD_KEY, Integer.toString(newThreshold));
+				Config.getPref().put(MOVEMENT_ALERT_THRESHOLD_KEY, Integer.toString(newThreshold));
 				threshold = newThreshold;
 			}
 		} catch (NumberFormatException e) {
@@ -49,8 +49,8 @@ public class MovementAlertSettings {
 		}
 		this.isEnabled = isEnabled;
 		this.isThresholdRelativeToZoom = isThresholdRelativeToZoom;
-		Main.pref.put(MOVEMENT_ALERT_ENABLE_KEY, Boolean.toString(isEnabled));
-		Main.pref.put(MOVEMENT_ALERT_RELATIVE_TO_ZOOM_LEVEL, Boolean.toString(isThresholdRelativeToZoom));
+		Config.getPref().put(MOVEMENT_ALERT_ENABLE_KEY, Boolean.toString(isEnabled));
+		Config.getPref().put(MOVEMENT_ALERT_RELATIVE_TO_ZOOM_LEVEL, Boolean.toString(isThresholdRelativeToZoom));
 		
 	}
 	public boolean isEnabled() {

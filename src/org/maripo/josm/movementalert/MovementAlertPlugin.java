@@ -10,7 +10,6 @@ import java.awt.Toolkit;
 
 import org.maripo.josm.movementalert.MovementMonitor.MovementListener;
 import org.openstreetmap.gui.jmapviewer.OsmMercator;
-import org.openstreetmap.josm.Main;
 import org.openstreetmap.josm.data.coor.LatLon;
 import org.openstreetmap.josm.gui.ExtendedDialog;
 import org.openstreetmap.josm.gui.MainApplication;
@@ -60,7 +59,7 @@ public class MovementAlertPlugin extends Plugin implements LayerChangeListener, 
 
 	static class ConfirmMoveDialog extends ExtendedDialog {
 		ConfirmMoveDialog() {
-			super(Main.parent, tr("Move elements"), "OK");
+			super(MainApplication.getMainFrame(), tr("Move elements"), "OK");
 			setButtonIcons("ok");
 		}
 	}
